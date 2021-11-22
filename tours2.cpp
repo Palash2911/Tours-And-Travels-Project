@@ -1,6 +1,7 @@
 #include <bits/stdc++.h>
 #include <fstream>
 #include <string.h>
+#include <unistd.h>
 using namespace std;
 class tours
 {
@@ -11,7 +12,7 @@ class tours
     int tid=0;
     int cost=0;
     int d,y,m;
-    string s;
+    char des[100];
 public:
     void trip();
     void new_user();
@@ -41,7 +42,7 @@ void tours::new_user()
     cout<<endl<<"Enter user name       :  ";
     cin.ignore();
     cin.getline(name,40);
-    cout<<"Enter user address    :   ";
+    cout<<"Enter user address    :  ";
     cin.getline(add,100);
     cout<<"Enter user email-id   :  ";
     cin>>em;
@@ -51,15 +52,16 @@ void tours::new_user()
 void tours::trip()
 {
     int i;
-    cout<<"Enter The Destination For your Trip :  "<<endl;
-    cin>>s;
-    cout<<"Enter Trip date : "<<endl;
+    cout<<"Enter Trip Destination :  ";
+    cin.ignore();
+    cin.getline(des,100);
+    cout<<"Enter Trip date :  ";
     cin>>d;
-    cout<<"Enter Trip month (in numbers) : "<<endl;
+    cout<<"Enter Trip month (in numbers) :  ";
     cin>>m;
-    cout<<"Enter Trip year : "<<endl;
+    cout<<"Enter Trip year :  ";
     cin>>y;
-    cout<<"Enter total cost : "<<endl;
+    cout<<"Enter total cost :  ";
     cin>>cost;
 }
 void tours::show()
@@ -72,7 +74,7 @@ void tours::show()
 void tours::show_trip()
 {
     int i;
-    cout<<"Trip Destination : "<<s<<endl;
+    cout<<endl<<"Trip Destination :  "<<des<<endl;
     cout<<"Trip Date        : "<<d<<"/ "<<m<<"/ "<<y<<endl;
     cout<<"Trip cost        : "<<cost<<endl;
 }
@@ -88,12 +90,11 @@ void file::add_user()
 fout.open("user.dat",ios::binary|ios::app);
 if(fout)
 {
-    cout<<endl<<endl<<endl<<endl<<endl<<"         Welcome to FUTURISTIC Tours And Travels "<<endl<<endl<<endl;
     cout<<endl<<"How many users do you want to add (max=5) ? "<<endl;
     cin>>i;
     for(int j=0;j<i;j++)
        {
-           cout<<endl<<"User "<<j+1<<endl;
+         cout<<endl<<"User "<<j+1<<endl;
          p[i].new_user();
          fout.write((char*)&p[i],sizeof(p[i]));
          cout<<"User added "<<endl;
@@ -116,7 +117,6 @@ if(fout)
       {
             if(b.user_id()==q)
           {
-            cout<<endl<<"Enter trip for user "<<endl;
             b.trip();
             fout.write((char*)&b,sizeof(b));
             flag=1;
@@ -144,7 +144,7 @@ while(fin.read((char*)&b,sizeof(b)))
 }
 if(flag==0)
 {
-    cout<<endl<<"No users in the list "<<endl<<endl;
+    cout<<endl<<"No users in the list "<<endl;
 }
 fin.close();
 }
@@ -245,43 +245,64 @@ void file::edit_user()
 }
 int main()
 {
-    int i;
-    char ch;
+    int i,j,k;
+    string ch,vr;
   file a;
+    cout<<endl<<endl<<"           Welcome to FUTURISTIC Tours And Travels "<<endl<<endl<<endl;
+     cout<<"                ________________________________  "<<endl<<endl;
+     cout<<"               |  1.     Physical Tour.         |"<<endl<<endl;
+     cout<<"               |  2.     Virtual Tour.          |"<<endl<<endl;
+     cout<<"               |________________________________|"<<endl<<endl;
+     cout<<"Your Choice:  ";
+     cin>>j;
+     if(j==2)
+      {
+        cout<<"A Virtual Headset :   Rs. 4000 "<<endl;
+        cout<<"Do you want to Order ?  "<<endl;
+        cin>>vr;
+        if(vr=="Yes" || vr == "yes")
+        {
+        cout<<"How many Headset do you want to Order :  "<<endl;
+        cin>>k;
+        cout<<"Your Total Amount is  "<<k*4000<<endl;
+        cout<<"Your Order Will be with you soon :)  "<<endl;
+        }
+    }
    do
    {
-     cout<<"                        *HOMEPAGE*  "<<endl<<endl;
-     cout<<"                ________________________________  "<<endl<<endl;
-     cout<<"               |  1.     New User.              |"<<endl<<endl;
-     cout<<"               |  2.     New trip.              |"<<endl<<endl;
-     cout<<"               |  3.     All user information.  |"<<endl<<endl;
-     cout<<"               |  4.     Edit User.             |"<<endl<<endl;
-     cout<<"               |  5.     Delete User.           |"<<endl<<endl;
-     cout<<"               |  6.     search  User details.  |"<<endl<<endl;
-     cout<<"               |________________________________|"<<endl<<endl;
-     cout<<" Enter your choice :  ";
-     cin>>i;
-     switch(i)
-     {
-         case 1: a.add_user();
-         break;
-         case 2: a.new_trip();
-         break;
-         case 3: a.show_users();
-         break;
-         case 4: a.edit_user();
-         break;
-         case 5: a.delete_user();
-         break;
-         case 6: a.user_d();
-         break;
-         default: cout<<"Invalid choice. "<<endl;
-         break;
-     }
-     cout<<endl<<"Do you want to continue ? "<<endl;
-     cin>>ch;
+       sleep(1);
+        cout<<endl<<"                       *HOMEPAGE*  "<<endl<<endl;
+        cout<<"                ________________________________  "<<endl<<endl;
+        cout<<"               |  1.     New User.              |"<<endl<<endl;
+        cout<<"               |  2.     New trip.              |"<<endl<<endl;
+        cout<<"               |  3.     All user information.  |"<<endl<<endl;
+        cout<<"               |  4.     Edit User.             |"<<endl<<endl;
+        cout<<"               |  5.     Delete User.           |"<<endl<<endl;
+        cout<<"               |  6.     Search  User details.  |"<<endl<<endl;
+        cout<<"               |  7.     EXIT                   |"<<endl<<endl;
+        cout<<"               |________________________________|"<<endl<<endl;
+        cout<<" Enter your choice :  ";
+        cin>>i;
+        switch(i)
+        {
+            case 1: a.add_user();
+            break;
+            case 2: a.new_trip();
+            break;
+            case 3: a.show_users();
+            break;
+            case 4: a.edit_user();
+            break;
+            case 5: a.delete_user();
+            break;
+            case 6: a.user_d();
+            break;
+            case 7: break;
+            default: cout<<"Invalid choice. "<<endl;
+            break;
+        }
      cout<<endl<<endl;
-   }while(ch=='y'||ch=='Y');
-   cout<<endl<<"Thank You for choosing us. "<<endl;
+   }while(i!=7);
+   cout<<endl<<"Thank You for choosing us!! "<<endl<<endl;
     return 0;
 }
