@@ -253,16 +253,16 @@ int main()
      cout<<"               |  1.     Physical Tour.         |"<<endl<<endl;
      cout<<"               |  2.     Virtual Tour.          |"<<endl<<endl;
      cout<<"               |________________________________|"<<endl<<endl;
-     cout<<"Your Choice:  ";
+     cout<<"Your Choice :  ";
      cin>>j;
      if(j==2)
       {
         cout<<"A Virtual Headset :   Rs. 4000 "<<endl;
-        cout<<"Do you want to Order ?  "<<endl;
+        cout<<"Do you want to Order ?  ";
         cin>>vr;
         if(vr=="Yes" || vr == "yes")
         {
-        cout<<"How many Headset do you want to Order :  "<<endl;
+        cout<<"How many Headset do you want to Order :  ";
         cin>>k;
         cout<<"Your Total Amount is  "<<k*4000<<endl;
         cout<<"Your Order Will be with you soon :)  "<<endl;
